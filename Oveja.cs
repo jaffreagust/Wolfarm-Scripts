@@ -25,14 +25,17 @@ public class Oveja : MonoBehaviour
     public void Comportamiento_Oveja()
     {
        
-        if (Vector3.Distance(transform.position, target.transform.position) > 3){
+        if (Vector3.Distance(transform.position, target.transform.position) > 3)
+        {
             peligro = false;
         }
-        else {
+        else 
+        {
             peligro = true;
         }
 
-        if (peligro == false && colision == false){
+        if (peligro == false && colision == false)
+        {
             Debug.Log("Modo seguro");
             cronometro += 1 * Time.deltaTime;
             if (cronometro >=1)
@@ -58,7 +61,8 @@ public class Oveja : MonoBehaviour
                     break;
             }
         }
-        else if (peligro == true && colision == false){
+        else if (peligro == true && colision == false)
+        {
             Debug.Log("Modo peligro");
             var lookPos = transform.position - target.transform.position;
             lookPos.y = 0;
@@ -66,15 +70,18 @@ public class Oveja : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, 2);
             cuerpo.AddForce(transform.forward * dangerSheep );
         }
-         if (colision == true){
-            if(grado<180){
+         if (colision == true)
+         {
+            if(grado<180)
+            {
                 var grado2 = grado + 100;
                 var angulo2 = Quaternion.Euler(0, grado2, 0);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, angulo2, 2);
                 cuerpo.AddForce(transform.forward * velSheep);
                 Debug.Log(grado2);
             }
-            else{
+            else
+            {
                 var grado2 = grado - 100;
                 var angulo2 = Quaternion.Euler(0, grado2, 0);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, angulo2, 2);
@@ -87,14 +94,13 @@ public class Oveja : MonoBehaviour
     void Update()
     {
         Comportamiento_Oveja();
-        
-        
     }
 
     public void OnCollisionEnter(Collision collision)
     {
        
-        if(collision.gameObject.tag == "Corral"){
+        if(collision.gameObject.tag == "Corral")
+        {
             colision = true;
             peligro = false; 
         }
@@ -103,7 +109,8 @@ public class Oveja : MonoBehaviour
 
     public void OnCollisionExit(Collision collision)
     {
-        if(collision.gameObject.tag == "Corral"){
+        if(collision.gameObject.tag == "Corral")
+        {
             colision = false;
             Debug.Log("collision exit");
         }
