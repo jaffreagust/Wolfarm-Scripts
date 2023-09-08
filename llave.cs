@@ -11,13 +11,13 @@ public class llave : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        llave_found = true;
+        llave_found = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(llave_found == true && Input.GetKeyDown(openKey)){
+        if(Input.GetKeyDown(openKey)){
             OpenDoor();
         }
     }
@@ -27,8 +27,13 @@ public class llave : MonoBehaviour
 
         foreach (Collider collider in hitColliders)
         {
-            if (collider.gameObject.tag == "Puerta"){
-                collider.gameObject.layer = LayerMask.NameToLayer("Ignore");;
+            if (collider.gameObject.tag == "Puerta" && llave_found == true){
+                collider.gameObject.layer = LayerMask.NameToLayer("Ignore");
+                
+            }
+            if(collider.gameObject.tag == "Llave"){
+                llave_found = true;
+                Destroy(collider.gameObject);
             }
         }
     }
